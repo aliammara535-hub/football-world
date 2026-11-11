@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EuroLeagues Hub | European Football Guide</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-card: rgba(23, 32, 54, 0.7);
+      --bg-card-hover: rgba(30, 41, 69, 0.9);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(56, 189, 248, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-gold: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-rose: #f43f5e;
+      --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0a0e17 100%);
+      --glass-blur: blur(14px);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card-hover: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(14, 165, 233, 0.5);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --gradient-hero: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 60%, #e2e8f0 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: var(--glass-blur);
+      background-color: rgba(10, 14, 23, 0.8);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    [data-theme="light"] header {
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-blue);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      transform: rotate(15deg);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: var(--gradient-hero);
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 3.25rem;
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Stats Ribbon */
+    .stats-ribbon {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      border-right: 1px solid var(--border-color);
+    }
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--accent-blue);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.2rem;
+    }
+
+    /* Search and Filter Section */
+    .controls-section {
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .controls-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+      max-width: 440px;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.8rem 1rem 0.8rem 2.8rem;
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-box input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.55rem 1.15rem;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .filter-btn:hover {
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .filter-btn.active {
+      background: var(--accent-blue);
+      color: #0f172a;
+      border-color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    /* League Cards Grid */
+    .leagues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 2rem;
+      padding: 1.5rem 0 4rem;
+    }
+
+    .league-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .league-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-banner {
+      height: 120px;
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    /* League specific banner gradients */
+    .banner-pl { background: linear-gradient(135deg, #3d195b 0%, #1e0933 100%); }
+    .banner-laliga { background: linear-gradient(135deg, #991b1b 0%, #450a0a 100%); }
+    .banner-seriea { background: linear-gradient(135deg, #0369a1 0%, #082f49 100%); }
+    .banner-bundesliga { background: linear-gradient(135deg, #b91c1c 0%, #1e293b 100%); }
+    .banner-ligue1 { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); }
+    .banner-eredivisie { background: linear-gradient(135deg, #c2410c 0%, #431407 100%); }
+    .banner-primeira { background: linear-gradient(135deg, #15803d 0%, #052e16 100%); }
+
+    .banner-decor {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      font-size: 7rem;
+      color: rgba(255, 255, 255, 0.05);
+      font-weight: 900;
+      pointer-events: none;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .league-country-tag {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .league-rank-tag {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .league-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: -2.8rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .league-logo-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border-color);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    .league-names h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .league-names p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .league-summary {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    /* Key Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.25rem;
+    }
+
+    .spec-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .spec-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 0.15rem;
+    }
+
+    .derby-preview {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--accent-gold);
+      padding: 0.5rem 0.8rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .derby-preview strong {
+      color: var(--accent-gold);
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .view-more-btn {
+      background: transparent;
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-blue);
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      transition: var(--transition);
+      width: 100%;
+      justify-content: center;
+    }
+    .view-more-btn:hover {
+      background: var(--accent-blue);
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: var(--glass-blur);
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .compare-table th {
+      background: var(--bg-secondary);
+      padding: 1.1rem 1.25rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .compare-table td {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .compare-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    .table-league-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* UEFA System Info Card */
+    .uefa-guide {
+      margin: 4rem 0;
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .uefa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .uefa-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .uefa-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-ucl { color: #38bdf8; }
+    .badge-uel { color: #fb923c; }
+    .badge-uecl { color: #4ade80; }
+
+    /* Interactive Trivia Section */
+    .trivia-section {
+      padding: 3rem 0;
+    }
+
+    .trivia-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .trivia-badge {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      padding: 0.3rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .trivia-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .trivia-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .trivia-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.9rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .trivia-btn:hover {
+      border-color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.05);
+    }
+    .trivia-btn.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-emerald);
+      color: #34d399;
+    }
+    .trivia-btn.wrong {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--accent-rose);
+      color: #fb7185;
+    }
+
+    .trivia-feedback {
+      min-height: 28px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-backdrop.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      background: var(--bg-secondary);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .modal-close-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .modal-close-btn:hover {
+      background: var(--accent-rose);
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-club-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .club-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      background: var(--bg-primary);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .stats-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+      .uefa-grid {
+        grid-template-columns: 1fr;
+      }
+      .trivia-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .stats-ribbon {
+        grid-template-columns: 1fr;
+      }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+      }
+      .stat-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .leagues-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-trophy"></i></div>
+        <span>EuroLeagues<span style="color: var(--accent-blue);">.</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#leagues" class="active">Leagues</a></li>
+        <li><a href="#compare">Comparison</a></li>
+        <li><a href="#uefa">European Spots</a></li>
+        <li><a href="#trivia">Trivia Quiz</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <i class="fa-solid fa-futbol"></i> UEFA Top Tier Leagues Compendium
+        </div>
+        <h1 class="hero-title">The Pinnacle of <span>European Football</span></h1>
+        <p class="hero-description">
+          Explore comprehensive guides, historic rivalries, format breakdowns, and statistics for Europe's most prestigious domestic football championships.
+        </p>
+
+        <!-- Stats Ribbon -->
+        <div class="stats-ribbon">
+          <div class="stat-item">
+            <div class="stat-number">Top 5</div>
+            <div class="stat-label">Elite European Leagues</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">96</div>
+            <div class="stat-label">Division 1 Clubs</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4.5B+</div>
+            <div class="stat-label">Worldwide Viewers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">65+</div>
+            <div class="stat-label">European Cup Champions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls Section (Filter & Search) -->
+  <section class="controls-section" id="leagues">
+    <div class="container">
+      <div class="controls-wrapper">
+        <!-- Search bar -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="leagueSearch" placeholder="Search league, country, record club...">
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-tags" id="filterContainer">
+          <button class="filter-btn active" data-filter="all">All Leagues</button>
+          <button class="filter-btn" data-filter="England">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</button>
+          <button class="filter-btn" data-filter="Spain">🇪🇸 Spain</button>
+          <button class="filter-btn" data-filter="Italy">🇮🇹 Italy</button>
+          <button class="filter-btn" data-filter="Germany">🇩🇪 Germany</button>
+          <button class="filter-btn" data-filter="France">🇫🇷 France</button>
+          <button class="filter-btn" data-filter="Other">🌐 Other Top Leagues</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leagues Grid -->
+  <main class="container">
+    <div class="leagues-grid" id="leaguesGrid">
+      <!-- Injected via JavaScript for clean maintainability & instant responsiveness -->
+    </div>
+  </main>
+
+  <!-- Comparison Matrix Table -->
+  <section class="comparison-section" id="compare">
+    <div class="container">
+      <div class="section-header">
+        <h2>Side-by-Side League Comparison</h2>
+        <p>Compare the competitive formats, historical achievements, and structural characteristics across major European leagues.</p>
+      </div>
+
+      <div class="table-container">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>League</th>
+              <th>Country</th>
+              <th>Teams</th>
+              <th>UCL Spots</th>
+              <th>Relegation</th>
+              <th>Most Titles</th>
+              <th>All-Time Top Scorer</th>
+              <th>Founded</th>
+            </tr>
+          </thead>
+          <tbody id="comparisonTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- UEFA Qualification Guide -->
+  <section class="container" id="uefa">
+    <div class="uefa-guide">
+      <div style="max-width: 600px;">
+        <span class="badge-pill"><i class="fa-solid fa-ranking-star"></i> UEFA European Hierarchy</span>
+        <h2 style="font-size: 2rem; margin: 0.8rem 0 0.5rem;">How European Spots Work</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Domestic league standings determine which clubs qualify for UEFA's prestigious continental competitions based on each country's 5-year UEFA coefficient ranking.
+        </p>
+      </div>
+
+      <div class="uefa-grid">
+        <div class="uefa-card">
+          <h4><i class="fa-solid fa-star badge-ucl"></i> UEFA Champions League</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem;">
+            The crown jewel of club football. The top 4 clubs from England, Spain, Italy, and Germany qualify directly for the 36-team Swiss-model league phase.
+          </p>
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue);">Top 4 / Extra coefficient spots</span>
+        </div>
+
+        <div class="uefa-card">
+          <h4><i class="fa-solid fa-shield-halved badge-uel"></i> UEFA Europa League</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem;">
+            Secondary European tier contested by 5th placed teams and domestic main cup winners (e.g. FA Cup, Copa del Rey).
+          </p>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #fb923c;">5th Place & Domestic Cup Winners</span>
+        </div>
+
+        <div class="uefa-card">
+          <h4><i class="fa-solid fa-award badge-uecl"></i> UEFA Conference League</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem;">
+            Third-tier competition offering intense continental knockout drama for 6th/7th placed league finishers or secondary cup winners.
+          </p>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #4ade80;">6th or 7th Place / League Cup</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trivia Interactive Section -->
+  <section class="trivia-section" id="trivia">
+    <div class="container">
+      <div class="trivia-card">
+        <div class="trivia-badge"><i class="fa-solid fa-lightbulb"></i> Test Your Knowledge</div>
+        <h3 id="triviaQuestion">Loading football trivia...</h3>
+        <div class="trivia-options" id="triviaOptions"></div>
+        <div class="trivia-feedback" id="triviaFeedback"></div>
+        <button id="nextTriviaBtn" class="filter-btn" style="margin-top: 1rem; display: none;">
+          Next Question <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Breakdown Modal -->
+  <div class="modal-backdrop" id="leagueModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div id="modalLogo" style="font-size: 1.6rem; color: var(--accent-blue);"></div>
+          <div>
+            <h3 id="modalTitle" style="font-size: 1.3rem; margin: 0;"></h3>
+            <p id="modalCountry" style="font-size: 0.85rem; color: var(--text-dim); margin: 0;"></p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="font-weight: 700; color: var(--text-main);">EuroLeagues Hub &copy; 2026</p>
+      <p>Curated guide to the world's finest European football championships.</p>
+    </div>
+  </footer>
+
+  <!-- Script Data & Logic -->
+  <script>
+    // Database of European Leagues
+    const leaguesData = [
+      {
+        id: "premier-league",
+        name: "Premier League",
+        officialName: "English Premier League",
+        country: "England",
+        flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        rank: "#1 in UEFA Coefficient",
+        founded: 1992,
+        teams: 20,
+        relegation: "Bottom 3 to Championship",
+        uclSpots: "Top 4 (+ potential 5th)",
+        mostTitles: "Manchester United (20)",
+        topScorer: "Alan Shearer (260 goals)",
+        icon: "fa-lion",
+        bannerClass: "banner-pl",
+        summary: "The most-watched sports league on Earth, renowned for its unmatched commercial power, relentless intensity, and fierce multi-team title races.",
+        derbies: "Manchester Derby, North London Derby, Northwest Derby (Liverpool vs Man Utd)",
+        topClubs: ["Manchester City", "Arsenal", "Liverpool", "Manchester United", "Chelsea", "Tottenham", "Aston Villa", "Newcastle United"],
+        detailedInfo: {
+          format: "38 matchweeks played from August to May. Each club plays every other club home and away. 3 points for a win, 1 for a draw.",
+          keyFacts: [
+            "Generated over £6 Billion in annual broadcasting rights across 180+ territories.",
+            "Arsenal's 2003-04 squad remains the only side to complete a full 38-game season unbeaten ('The Invincibles').",
+            "Has seen 7 different champions since its 1992 launch: Man Utd, Blackburn, Arsenal, Chelsea, Man City, Leicester, Liverpool."
+          ],
+          trophyWeight: "25 kg (Made of sterling silver, silver gilt, and Malachite gemstone)"
+        }
+      },
+      {
+        id: "la-liga",
+        name: "La Liga",
+        officialName: "Campeonato Nacional de Liga de Primera División",
+        country: "Spain",
+        flag: "🇪🇸",
+        rank: "#2 in UEFA Coefficient",
+        founded: 1929,
+        teams: 20,
+        relegation: "Bottom 3 to Segunda División",
+        uclSpots: "Top 4 (+ potential 5th)",
+        mostTitles: "Real Madrid (36)",
+        topScorer: "Lionel Messi (474 goals)",
+        icon: "fa-shield-halved",
+        bannerClass: "banner-laliga",
+        summary: "World-class technical precision and home to two of sports history's grandest institutions: Real Madrid and FC Barcelona.",
+        derbies: "El Clásico (Real Madrid vs Barcelona), Madrid Derby (Real vs Atlético), Seville Derby",
+        topClubs: ["Real Madrid", "FC Barcelona", "Atlético Madrid", "Athletic Club", "Real Sociedad", "Villarreal", "Sevilla", "Real Betis"],
+        detailedInfo: {
+          format: "20 clubs, 38 match rounds. Head-to-head records serve as the primary tiebreaker between clubs level on points.",
+          keyFacts: [
+            "La Liga clubs have won more UEFA Champions League (20) and Europa League (14) titles than any other nation.",
+            "Lionel Messi holds the single-season scoring record with an astronomical 50 goals in 2011-12.",
+            "Athletic Club, Barcelona, and Real Madrid have never been relegated since the league's foundation in 1929."
+          ],
+          trophyWeight: "18 kg crafted in solid sterling silver"
+        }
+      },
+      {
+        id: "serie-a",
+        name: "Serie A",
+        officialName: "Serie A Enilive",
+        country: "Italy",
+        flag: "🇮🇹",
+        rank: "#3 in UEFA Coefficient",
+        founded: 1898,
+        teams: 20,
+        relegation: "Bottom 3 to Serie B",
+        uclSpots: "Top 4 (+ potential 5th)",
+        mostTitles: "Juventus (36)",
+        topScorer: "Silvio Piola (274 goals)",
+        icon: "fa-crown",
+        bannerClass: "banner-seriea",
+        summary: "The legendary crucible of defensive genius, tactical chess-matches, passionate tifosi ultras, and historic European powerhouses.",
+        derbies: "Derby della Madonnina (Inter vs Milan), Derby d'Italia (Inter vs Juventus), Derby della Capitale (Roma vs Lazio)",
+        topClubs: ["Inter Milan", "AC Milan", "Juventus", "Napoli", "AS Roma", "Lazio", "Atalanta", "Fiorentina"],
+        detailedInfo: {
+          format: "Double round-robin schedule across 38 matchdays. If two teams are tied for 1st place or 17th place (relegation line), a 90-minute playoff decider is played.",
+          keyFacts: [
+            "Winners wear the famous tricolor Scudetto patch on their jerseys throughout the following campaign.",
+            "AC Milan went an astounding 58 consecutive Serie A matches unbeaten between 1991 and 1993.",
+            "Juventus won nine consecutive Scudetti between 2011-12 and 2019-20."
+          ],
+          trophyWeight: "Coppa Campioni d'Italia (8 kg made of gold and sodalite base)"
+        }
+      },
+      {
+        id: "bundesliga",
+        name: "Bundesliga",
+        officialName: "Fußball-Bundesliga",
+        country: "Germany",
+        flag: "🇩🇪",
+        rank: "#4 in UEFA Coefficient",
+        founded: 1963,
+        teams: 18,
+        relegation: "Bottom 2 + 16th Relegation Playoff",
+        uclSpots: "Top 4 (+ potential 5th)",
+        mostTitles: "Bayern Munich (33)",
+        topScorer: "Gerd Müller (365 goals)",
+        icon: "fa-bolt",
+        bannerClass: "banner-bundesliga",
+        summary: "High-octane pressing, electrifying counter-attacks, rock-bottom ticket prices, and the world's highest average stadium attendance under the 50+1 fan ownership model.",
+        derbies: "Der Klassiker (Bayern vs Dortmund), Revierderby (Dortmund vs Schalke), Rheinderby",
+        topClubs: ["Bayern Munich", "Borussia Dortmund", "Bayer Leverkusen", "RB Leipzig", "Eintracht Frankfurt", "VfB Stuttgart", "Borussia Mönchengladbach"],
+        detailedInfo: {
+          format: "18 teams contest 34 matches. The 16th-placed Bundesliga team plays a high-stakes two-legged playoff against the 3rd-placed 2. Bundesliga side.",
+          keyFacts: [
+            "The famous 50+1 rule guarantees that club members (fans) retain majority voting rights, blocking foreign oligarch takeovers.",
+            "Bayer Leverkusen made history in 2023-24 by becoming the first ever side to finish a Bundesliga season completely unbeaten (Invincible).",
+            "Borussia Dortmund's 'Yellow Wall' (Südtribüne) holds 25,000 standing supporters, the largest standing terrace in Europe."
+          ],
+          trophyWeight: "Meisterschale (11 kg salad bowl of silver, tourmaline, and gold)"
+        }
+      },
+      {
+        id: "ligue-1",
+        name: "Ligue 1",
+        officialName: "Ligue 1 McDonald's",
+        country: "France",
+        flag: "🇫🇷",
+        rank: "#5 in UEFA Coefficient",
+        founded: 1932,
+        teams: 18,
+        relegation: "Bottom 2 + 16th Relegation Playoff",
+        uclSpots: "Top 3 Direct + 4th Qualifying",
+        mostTitles: "Paris Saint-Germain (12)",
+        topScorer: "Delio Onnis (299 goals)",
+        icon: "fa-gem",
+        bannerClass: "banner-ligue1",
+        summary: "The ultimate proving ground and global academy of world-beating young talent, defined by blistering speed, physicality, and Parisian star power.",
+        derbies: "Le Classique (PSG vs Marseille), Derby du Rhône (Lyon vs Saint-Étienne), Choc des Olympiques",
+        topClubs: ["Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "Olympique Lyonnais", "Lille OSC", "OGC Nice", "Stade Rennais"],
+        detailedInfo: {
+          format: "18 teams competing over 34 matchdays. France recently reduced its top division from 20 to 18 to elevate European competitiveness.",
+          keyFacts: [
+            "French academies produced stars like Kylian Mbappé, Thierry Henry, Zinedine Zidane, and Eden Hazard.",
+            "Olympique de Marseille is the only French club to have won the UEFA Champions League (1993).",
+            "Saint-Étienne held the all-time record of 10 titles for decades before PSG surged past with 12."
+          ],
+          trophyWeight: "Hexagoal trophy designed by Pablo Reinoso"
+        }
+      },
+      {
+        id: "eredivisie",
+        name: "Eredivisie",
+        officialName: "Dutch Eredivisie",
+        country: "Other",
+        flag: "🇳🇱",
+        rank: "#6 in UEFA Coefficient",
+        founded: 1956,
+        teams: 18,
+        relegation: "Bottom 2 + 16th Relegation Playoff",
+        uclSpots: "Top 2 Direct + 3rd Qualifying",
+        mostTitles: "Ajax (36)",
+        topScorer: "Willy van der Kuijlen (311 goals)",
+        icon: "fa-wind",
+        bannerClass: "banner-eredivisie",
+        summary: "The birthplace of 'Total Football' (Totaalvoetbal) pioneered by Rinus Michels and Johan Cruyff, prioritizing fluid attacking mastery and world-renowned youth development.",
+        derbies: "De Klassieker (Ajax vs Feyenoord), De Topper (Ajax vs PSV)",
+        topClubs: ["AFC Ajax", "PSV Eindhoven", "Feyenoord", "AZ Alkmaar", "FC Twente", "FC Utrecht"],
+        detailedInfo: {
+          format: "18 teams across 34 rounds. European playoffs are contested among 5th to 8th places for UEFA Conference League qualification tickets.",
+          keyFacts: [
+            "The 'Big Three' (Ajax, PSV, Feyenoord) have won almost every league edition since 1965.",
+            "Ajax has won 4 European Cups/Champions Leagues, famous for youth academies producing Cruyff, Van Basten, Bergkamp, and Seedorf."
+          ],
+          trophyWeight: "Kampchaal (Historic silver championship dish)"
+        }
+      },
+      {
+        id: "primeira-liga",
+        name: "Primeira Liga",
+        officialName: "Liga Portugal Betclic",
+        country: "Other",
+        flag: "🇵🇹",
+        rank: "#7 in UEFA Coefficient",
+        founded: 1934,
+        teams: 18,
+        relegation: "Bottom 2 + 16th Relegation Playoff",
+        uclSpots: "Top 1-2 Direct + Qualifying",
+        mostTitles: "Benfica (38)",
+        topScorer: "Fernando Peyroteo (332 goals)",
+        icon: "fa-compass",
+        bannerClass: "banner-primeira",
+        summary: "Europe's premier scouting gateway for South American and homegrown superstars, fiercely dominated by the historic 'Os Três Grandes' triumvirate.",
+        derbies: "O Clássico (Porto vs Benfica), Derby de Lisboa (Benfica vs Sporting CP), Dérbi da Invicta",
+        topClubs: ["SL Benfica", "FC Porto", "Sporting CP", "SC Braga", "Vitória de Guimarães"],
+        detailedInfo: {
+          format: "18 clubs playing 34 matches. Extremely competitive European qualifying battles behind the traditional big three.",
+          keyFacts: [
+            "Only two teams outside 'The Big Three' have ever won the Portuguese championship in nearly a century: Belenenses (1946) and Boavista (2001).",
+            "Supplied the global stage with Cristiano Ronaldo, Luís Figo, Eusébio, Bruno Fernandes, and Bernardo Silva."
+          ],
+          trophyWeight: "Taça de Campeão Nacional"
+        }
+      }
+    ];
+
+    // Trivia Questions
+    const triviaPool = [
+      {
+        q: "Which manager famously guided Arsenal to an unbeaten 38-game Premier League season in 2003-04?",
+        options: ["Sir Alex Ferguson", "Arsène Wenger", "José Mourinho", "Pep Guardiola"],
+        answer: 1,
+        explanation: "Arsène Wenger led the 'Invincibles' to 26 wins and 12 draws."
+      },
+      {
+        q: "Which Spanish club has captured the most La Liga championships in history?",
+        options: ["FC Barcelona", "Atlético Madrid", "Real Madrid", "Athletic Club"],
+        answer: 2,
+        explanation: "Real Madrid has won 36 La Liga titles, ahead of FC Barcelona's 27."
+      },
+      {
+        q: "What is the famous rule that ensures supporters own at least 51% of German Bundesliga clubs?",
+        options: ["The Golden Share", "The 50+1 Rule", "The Bundesliga Fan Pact", "The Ultras Clause"],
+        answer: 1,
+        explanation: "The 50+1 rule guarantees commercial investors cannot override fan majorities."
+      },
+      {
+        q: "Who is the all-time highest goalscorer in Italian Serie A history?",
+        options: ["Francesco Totti", "Silvio Piola", "Gunnar Nordahl", "Roberto Baggio"],
+        answer: 1,
+        explanation: "Silvio Piola scored an unmatched 274 goals between 1929 and 1954."
+      },
+      {
+        q: "Which French club remains the only team from Ligue 1 to have won the UEFA Champions League?",
+        options: ["Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "Saint-Étienne"],
+        answer: 1,
+        explanation: "Marseille defeated AC Milan 1-0 in Munich in the inaugural 1993 UCL final."
+      }
+    ];
+
+    let currentTriviaIdx = 0;
+
+    // Render Cards
+    function renderCards(leagues) {
+      const container = document.getElementById("leaguesGrid");
+      if (leagues.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 4rem 1rem;">
+            <i class="fa-regular fa-futbol" style="font-size: 3rem; color: var(--text-dim); margin-bottom: 1rem;"></i>
+            <h3>No leagues found matching your query</h3>
+            <p style="color: var(--text-muted);">Try searching for another league, club or country.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = leagues.map(league => `
+        <article class="league-card" data-id="${league.id}">
+          <div class="card-banner ${league.bannerClass}">
+            <div class="league-country-tag">
+              <span>${league.flag}</span> ${league.country}
+            </div>
+            <div class="league-rank-tag">
+              <i class="fa-solid fa-trophy"></i> ${league.rank.split(' ')[0]}
+            </div>
+            <div class="banner-decor">${league.name.substring(0, 3)}</div>
+          </div>
+
+          <div class="card-body">
+            <div class="league-header">
+              <div class="league-logo-box">
+                <i class="fa-solid ${league.icon}"></i>
+              </div>
+              <div class="league-names">
+                <h3>${league.name}</h3>
+                <p>${league.officialName}</p>
+              </div>
+            </div>
+
+            <p class="league-summary">${league.summary}</p>
+
+            <div class="specs-grid">
+              <div class="spec-box">
+                <span class="spec-label">Teams</span>
+                <span class="spec-value">${league.teams} Clubs</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">Founded</span>
+                <span class="spec-value">${league.founded}</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">Record Champion</span>
+                <span class="spec-value">${league.mostTitles}</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">UCL Spots</span>
+                <span class="spec-value">${league.uclSpots}</span>
+              </div>
+            </div>
+
+            <div class="derby-preview">
+              <strong>Historic Derbies:</strong> ${league.derbies}
+            </div>
+
+            <div class="card-footer">
+              <button class="view-more-btn" onclick="openLeagueModal('${league.id}')">
+                <i class="fa-solid fa-circle-info"></i> Full League Dossier
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Render Comparison Table
+    function renderComparisonTable() {
+      const tbody = document.getElementById("comparisonTableBody");
+      tbody.innerHTML = leaguesData.map(l => `
+        <tr>
+          <td>
+            <div class="table-league-cell">
+              <i class="fa-solid ${l.icon}" style="color: var(--accent-blue);"></i>
+              ${l.name}
+            </div>
+          </td>
+          <td>${l.flag} ${l.country}</td>
+          <td><strong>${l.teams}</strong></td>
+          <td><span style="color: var(--accent-blue); font-weight: 600;">${l.uclSpots}</span></td>
+          <td>${l.relegation}</td>
+          <td><strong>${l.mostTitles}</strong></td>
+          <td>${l.topScorer}</td>
+          <td>${l.founded}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Modal Details
+    function openLeagueModal(leagueId) {
+      const league = leaguesData.find(item => item.id === leagueId);
+      if (!league) return;
+
+      document.getElementById("modalLogo").innerHTML = `<i class="fa-solid ${league.icon}"></i>`;
+      document.getElementById("modalTitle").textContent = league.officialName;
+      document.getElementById("modalCountry").textContent = `${league.flag} ${league.country} • Established ${league.founded}`;
+
+      const modalBody = document.getElementById("modalBody");
+      modalBody.innerHTML = `
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-main);">
+            <i class="fa-solid fa-book-open" style="color: var(--accent-blue); margin-right: 0.5rem;"></i> Overview & Format
+          </h4>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+            ${league.detailedInfo.format}
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-main);">
+            <i class="fa-solid fa-shield-cat" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> Notable Flagship Clubs
+          </h4>
+          <div class="modal-club-chips">
+            ${league.topClubs.map(club => `<span class="club-chip">${club}</span>`).join('')}
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--text-main);">
+            <i class="fa-solid fa-fire" style="color: var(--accent-rose); margin-right: 0.5rem;"></i> Iconic Rivalries & Clásicos
+          </h4>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            ${league.derbies}
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--text-main);">
+            <i class="fa-solid fa-award" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Historical Milestones & Records
+          </h4>
+          <ul style="padding-left: 1.25rem; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            ${league.detailedInfo.keyFacts.map(fact => `<li style="margin-bottom: 0.4rem;">${fact}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div style="background: var(--bg-card); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 0.88rem; color: var(--text-muted);">
+            <i class="fa-solid fa-trophy" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> Trophy Specification:
+          </span>
+          <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">${league.detailedInfo.trophyWeight}</span>
+        </div>
+      `;
+
+      const modal = document.getElementById("leagueModal");
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("leagueModal");
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    // Trivia Logic
+    function loadTrivia(index) {
+      const item = triviaPool[index];
+      document.getElementById("triviaQuestion").textContent = item.q;
+      const optsContainer = document.getElementById("triviaOptions");
+      const feedback = document.getElementById("triviaFeedback");
+      const nextBtn = document.getElementById("nextTriviaBtn");
+
+      feedback.textContent = "";
+      feedback.style.color = "";
+      nextBtn.style.display = "none";
+
+      optsContainer.innerHTML = item.options.map((opt, i) => `
+        <button class="trivia-btn" onclick="checkTriviaAnswer(${i})">
+          <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+          <i class="fa-regular fa-circle"></i>
+        </button>
+      `).join('');
+    }
+
+    function checkTriviaAnswer(selectedIndex) {
+      const item = triviaPool[currentTriviaIdx];
+      const buttons = document.querySelectorAll(".trivia-btn");
+      const feedback = document.getElementById("triviaFeedback");
+      const nextBtn = document.getElementById("nextTriviaBtn");
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === item.answer) {
+          btn.classList.add("correct");
+          btn.querySelector("i").className = "fa-solid fa-circle-check";
+        } else if (idx === selectedIndex) {
+          btn.classList.add("wrong");
+          btn.querySelector("i").className = "fa-solid fa-circle-xmark";
+        }
+      });
+
+      if (selectedIndex === item.answer) {
+        feedback.innerHTML = `🎉 Correct! ${item.explanation}`;
+        feedback.style.color = "var(--accent-emerald)";
+      } else {
+        feedback.innerHTML = `❌ Incorrect. ${item.explanation}`;
+        feedback.style.color = "var(--accent-rose)";
+      }
+
+      nextBtn.style.display = "inline-flex";
+    }
+
+    // Filter & Search Logic
+    let activeFilter = "all";
+    let searchQuery = "";
+
+    function filterLeagues() {
+      let filtered = leaguesData.filter(league => {
+        const matchesFilter = (activeFilter === "all") ||
+          (activeFilter === "Other" ? (league.country !== "England" && league.country !== "Spain" && league.country !== "Italy" && league.country !== "Germany" && league.country !== "France") : league.country.toLowerCase() === activeFilter.toLowerCase());
+
+        const q = searchQuery.toLowerCase().trim();
+        const matchesSearch = !q ||
+          league.name.toLowerCase().includes(q) ||
+          league.officialName.toLowerCase().includes(q) ||
+          league.country.toLowerCase().includes(q) ||
+          league.mostTitles.toLowerCase().includes(q) ||
+          league.topClubs.some(c => c.toLowerCase().includes(q));
+
+        return matchesFilter && matchesSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    // Event Listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCards(leaguesData);
+      renderComparisonTable();
+      loadTrivia(currentTriviaIdx);
+
+      // Search input
+      document.getElementById("leagueSearch").addEventListener("input", (e) => {
+        searchQuery = e.target.value;
+        filterLeagues();
+      });
+
+      // Filter tabs
+      document.querySelectorAll(".filter-btn[data-filter]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-btn[data-filter]").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeFilter = btn.dataset.filter;
+          filterLeagues();
+        });
+      });
+
+      // Modal close events
+      document.getElementById("modalCloseBtn").addEventListener("click", closeModal);
+      document.getElementById("leagueModal").addEventListener("click", (e) => {
+        if (e.target.id === "leagueModal") closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      // Next Trivia button
+      document.getElementById("nextTriviaBtn").addEventListener("click", () => {
+        currentTriviaIdx = (currentTriviaIdx + 1) % triviaPool.length;
+        loadTrivia(currentTriviaIdx);
+      });
+
+      // Theme toggle
+      const themeToggleBtn = document.getElementById("themeToggle");
+      const currentTheme = localStorage.getItem("theme") || "dark";
+      if (currentTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeToggleBtn.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+      }
+
+      themeToggleBtn.addEventListener("click", () => {
+        const theme = document.documentElement.getAttribute("data-theme");
+        if (theme === "light") {
+          document.documentElement.removeAttribute("data-theme");
+          localStorage.setItem("theme", "dark");
+          themeToggleBtn.innerHTML = `<i class="fa-solid fa-moon"></i>`;
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+          themeToggleBtn.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
